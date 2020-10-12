@@ -92,6 +92,40 @@ def get_zeros_int64(shape):
     """Get zeros."""
     return np.zeros(shape).astype(np.int64)
 
+def get_ones_int32(shape):
+    """Get ones."""
+    return np.ones(shape).astype(np.int32)
+
+def get_small_rand_int32(shape):
+    """Get random ints in range [1, 99]"""
+    return np.random.randint(low=1, high=100, size=shape, dtype=np.int32)
+
+def get_zeros_then_ones(shape):
+    cnt = np.prod(shape)
+    zeros_cnt = cnt // 2
+    ones_cnt = cnt - zeros_cnt
+    return np.concatenate((np.zeros(zeros_cnt, dtype=np.int32), np.ones(ones_cnt, dtype=np.int32))).reshape(shape)
+
+def get_wav(shape):
+    """Get sound data."""
+    return np.sin(np.linspace(-np.pi, np.pi, shape[0]), dtype=np.float32)
+
+
+_INPUT_FUNC_MAPPING = {
+    "get_beach": get_beach,
+    "get_random": get_random,
+    "get_random256": get_random256,
+    "get_ramp": get_ramp,
+    "get_ones": get_ones,
+    "get_zeros": get_zeros,
+    "get_wav": get_wav,
+    "get_zeros_int32": get_zeros_int32,
+    "get_zeros_int64": get_zeros_int64,
+    "get_ones_int32": get_ones_int32,
+    "get_small_rand_int32": get_small_rand_int32,
+    "get_zeros_then_ones": get_zeros_then_ones
+}
+
 def get_wav(shape):
     """Get sound data."""
     return np.sin(np.linspace(-np.pi, np.pi, shape[0]), dtype=np.float32)
